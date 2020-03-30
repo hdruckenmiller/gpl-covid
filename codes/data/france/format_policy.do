@@ -139,6 +139,8 @@ replace social_distance = (social_distance + social_distance_national)/2 // The 
 replace social_distance_popw = (social_distance_popw + social_distance_national)/2
 drop social_distance_national
 
+//mandatory policy replaces optional measure
+replace social_distance_opt = 0 if social_distance == 1
 //  ----------------------
 
 *drop oversea regions
@@ -148,6 +150,7 @@ drop if adm1 < 10
 format date %tdCCYY-NN-DD
 rename (adm1_pop adm1) (population adm1_id)	
 rename *_popw *_popwt
+
 
 outsheet * using "data/processed/adm1/FRA_processed.csv", replace comma
 
